@@ -1149,8 +1149,9 @@ install_deps() {
             echo -ne "  ${BOLD}是否进行实时编译？${NC}[Y/n]: "
             read -r dkms_confirm || true
             if [[ "${dkms_confirm:-}" =~ ^[nN]$ ]]; then
-                warn "已跳过 ZFS 安装，返回主菜单"
-                return 1
+                warn "已跳过 ZFS 安装，将使用 dir/btrfs 存储池继续安装"
+                log "基础依赖安装完成（无 ZFS）"
+                return 0
             fi
             info "开始 DKMS 即时编译..."
             install_zfs_dkms
